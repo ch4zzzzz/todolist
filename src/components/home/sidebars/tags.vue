@@ -1,7 +1,9 @@
 <template>
   <sidebar
-    :items="items"
-    :addItem="true"
+    :items="items" 
+    :addItem="addItem"
+    :addRequestUrl="addRequestUrl"
+    :defaultIcon="icon"
     />
 </template>
 
@@ -15,17 +17,20 @@ export default {
   },
   data: function(){
     return{
-      items: [
-        {
-          id: 1,
-          name: "1",
-          href: "#",
-          icon: "glyphicon glyphicon-th-list",
-        },
-      ]
-
-
+      items: [],
+      addItem: true,
+      postURL: "",
+      addRequestUrl: "", 
+      icon: "glyphicon glyphicon-tag",
     }
+  },
+  created: function(){
+    console.log("created tags.vue");
+    this.$http.post(this.postURL).then(response => {
+
+    }, response => {
+
+    });
   },
 
 }

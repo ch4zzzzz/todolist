@@ -1,5 +1,14 @@
 <template>
-  <nav>
+  <section class="sidebar">
+    <div class="form-group" v-if="addItem">
+      <input type="text" class="form-control" id="addInput"
+          autocomplete="off"
+          :placeholder="addPlaceholder"
+          v-model="newItem"
+          @keyup.enter.prevent="add">
+
+    </div>
+    
     <ul class="list-group">
       <li v-for="item in items" :key="item.id" class="list-group-item">
         <a :href="item.href">
@@ -8,25 +17,9 @@
           {{item.name}}
         </a>
       </li>
-      <!-- <li class="list-group-item" v-if="addItem">
-        <a href="#" v-on:click.prevent="add">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          &nbsp;
-          添加
-        </a>
-      </li> -->
-
-      <div class="form-group" v-if="addItem">
-        <input type="text" class="form-control" id="addInput"
-            autocomplete="off"
-            :placeholder="addPlaceholder"
-            v-model="newItem"
-            @keyup.enter.prevent="add">
-      </div>
-
-
     </ul>
-  </nav>
+
+  </section>
 </template>
 
 <script>
@@ -44,7 +37,7 @@ export default {
   },
   props: {
     items: Array,
-    icon: String,
+    defaultIcon: String,
     addItem: Boolean,
     addPlaceholder: {
       type: String,
@@ -59,21 +52,28 @@ export default {
     add: function(){
       let items = this.items;
       let len = items.length;
-      let id = items[len-1]['id']+1;
+      let id;
+      if(len>0){
+        id = items[len-1]['id']+1
+      }
+      else{
+        id = 0;
+      }
       let thisOne = {
         "id": id,
         "name": this.newItem,
+        "icon": this.defaultIcon,
         "href": "#",
       }
+      this.newItem = "";
       items.push(thisOne);
-
       //POST
-      this.$http.post(addRequestUrl, thisOne).then(response => {
+      this.$http.post(this.addRequestUrl, thisOne).then(response => {
+        items[len]['href'] = "";
         console.log("post");
       }, response => {
         //error callback
       });
-
 
     }
   }
@@ -81,7 +81,9 @@ export default {
 </script>
 
 <style scoped="scoped">
-nav {
+@import "https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css";
+
+.sidebar {
   max-width: 200px;
 }
 
@@ -103,6 +105,7 @@ li a :hover{
 
 }
 
-
-@import "https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css";
+.form-group {
+  margin-bottom: 0;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <h1>{{msg}}</h1>
+    this is my house
   </div>
 </template>
 
