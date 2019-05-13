@@ -19,11 +19,11 @@
       <keep-alive>
         <component :is="currentTabComponent"></component>
       </keep-alive>
-
+  
     </section>
 
     <section class="col-md-6">
-      
+      <todo-content/>
     </section>
   </section>
 
@@ -33,6 +33,7 @@
 import sidebar from "./sidebars/sidebar.vue";
 import floders from "./sidebars/floders.vue";
 import tags from "./sidebars/tags.vue";
+import todoContent from "./todo-content/todo-content.vue";
 
 export default {
   name: 'home',
@@ -40,6 +41,7 @@ export default {
     sidebar,
     floders,
     tags,
+    todoContent,
   },
   data: function(){
     return{
