@@ -10,11 +10,14 @@
 <script>
 // import Cookies from 'js-cookie';
 import Vue from 'vue';
-import loginForm from './components/login/login-form.vue';
-import home from './components/home/home.vue';
+
 import VueResource from "vue-resource";
 Vue.use(VueResource);
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
+import loginForm from './components/login/login-form.vue';
+import home from './components/home/home.vue';
 
 export default {
   name: 'app',

@@ -64,10 +64,10 @@ export default {
 
 
 .datepicker input {
-  width: 40px;   
-  height: 40px;   
+  width: 35px;   
+  height: 35px;   
   background: url("./calendar-alt.png") no-repeat center;
-  background-size: 40px 40px;
+  background-size: 100% 100%;
   cursor: pointer;
   display: block;   
   font-size: 0;   
