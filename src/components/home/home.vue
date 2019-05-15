@@ -1,6 +1,6 @@
 <template>
   <section class="row">
-    <section class="col-md-2">
+    <section class="col-sm-2">
 
     <!-- 头导航： 所有、今天、日历-->
 
@@ -22,7 +22,7 @@
   
     </section>
 
-    <section class="col-md-6">
+    <section class="col-sm-6">
       <todo-content/>
     </section>
   </section>

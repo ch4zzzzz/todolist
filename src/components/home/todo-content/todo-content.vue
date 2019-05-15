@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="items.length">
 
     <h2>{{listName}}</h2>
     <div class="form-group row">
@@ -8,7 +8,7 @@
           autocomplete="off"
           :placeholder="addPlaceholder"
           v-model="newTodo"
-          @keyup.enter.prevent="add">
+          @keyup.enter.prevent="addItem">
       </div>
       
       <div class="col-sm-1 date">
@@ -18,7 +18,10 @@
       </div>
     </div>
 
-    
+    <todo-items
+        :items="items"
+        :showFinished="showFinished"
+        ref="todoItems"/>
     
     
   </section>  
@@ -27,18 +30,26 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker';
+import todoItems from './todo-items.vue';
 
 export default {
   name: "todo-content",
   components: {
     Datepicker,
-
+    todoItems,
   },
   data: function(){
     return{
       newTodo: "",
       date: "",
-      dateFormat: "d",
+      items: [
+        {
+          content: "sleep",
+          id: 0,
+          checked: false,
+        }
+      ],
+      showFinished: true,
     }
   },
   props: {
@@ -52,7 +63,14 @@ export default {
     },
   },
   methods: {
-    
+    addItem(){
+      let newItem = this.newTodo;
+      if(newItem.length>0){
+        this.$refs.todoItems.addItem(newItem);
+        this.newTodo = "";
+      }
+    }
+
 
   }
 
